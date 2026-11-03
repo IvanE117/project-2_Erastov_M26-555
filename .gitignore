@@ -1,4 +1,8 @@
 .venv
+.venv-test/
+.venv-linux/
 dist/
 __pycache__/
 *.egg-info
+demo.cast
+db_meta.json

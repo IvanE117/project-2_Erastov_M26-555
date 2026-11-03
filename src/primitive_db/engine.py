@@ -1,6 +1,9 @@
-import prompt, shlex
-from primitive_db.utils import save_metadata, load_metadata
+import shlex
+
+import prompt
+
 from primitive_db.core import create_table, drop_table, list_tables
+from primitive_db.utils import load_metadata, save_metadata
 
 
 def enter_command():
@@ -30,7 +33,7 @@ def enter_command():
 def print_help():
     """Prints the help message for the current mode."""
 
-    print("\n***Процесс работы с таблицей***")
+    print("\n***Процесс работы с таблицей***\n")
     print("Функции:")
     print("<command> create_table <имя_таблицы> <столбец1:тип> .. - создать таблицу")
     print("<command> list_tables - показать список всех таблиц")
@@ -47,7 +50,7 @@ def run():
         data = load_metadata('db_meta.json')
 
         response = enter_command()
-        try: 
+        try:
             args = shlex.split(response)
         except ValueError:
             print('Ошибка при вводе данных. Введите еще раз!\n')
@@ -71,7 +74,7 @@ def run():
 
             case 'list_tables':
                 list_tables(data)
-
+                print()
             case 'drop_table':
                 if len(args) != 2:
                     print('Ошибка при вводе параметров\n')

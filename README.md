@@ -1,46 +1,70 @@
 # Primitive DB
-Консольная БД
+
+Консольная база данных с поддержкой создания, просмотра и удаления таблиц.
 
 ## Установка
 
 Клонируйте репозиторий:
 
-`git clone <>`
-`cd primitive-db`
+```bash
+git clone https://github.com/IvanE117/project-2_Erastov_M26-555.git
+cd project-2_Erastov_M26-555
+```
 
 Установите зависимости и синхронизируйте виртуальное окружение:
 
-`uv sync`
+```bash
+uv sync
+```
 
 ## Запуск
 
-`uv run database`
+```bash
+uv run database
+```
 
 ## Управление таблицами
 
-Описание поддерживаемых команд:
+Поддерживаются следующие команды:
 
-- `create_table` — создание таблицы
-- `list_tables` — вывод всех таблиц 
-- `drop_table` — удаление таблицы
-- `help` — вывод инфорации по всем командам 
-- `exit` — выход из программы
+- `create_table` — создание таблицы;
+- `list_tables` — вывод списка всех таблиц;
+- `drop_table` — удаление таблицы;
+- `help` — вывод справки по командам;
+- `exit` — выход из программы.
 
-Поддерживаемые типы данных:
-- int — целое число;
-- str — строка;
-- bool — логическое значение.
+### Поддерживаемые типы данных
+
+- `int` — целое число;
+- `str` — строка;
+- `bool` — логическое значение.
 
 ## Пример использования
 
-Пример создания таблицы:
-- `create_table users name:str age:int`
+Создание таблицы:
 
-Пример удаления таблицы:
-- `drop_table users`
+```text
+create_table users name:str age:int
+```
 
-Пример вывода все таблиц:
-- `list_tables`
+Просмотр списка таблиц:
 
-Завершения работы:
-- `exit`
+```text
+list_tables
+```
+
+Удаление таблицы:
+
+```text
+drop_table users
+```
+
+Завершение работы:
+
+```text
+exit
+```
+
+## Демонстрация
+
+[![asciicast](https://asciinema.org/a/E49SOALxzntdYQeC.svg)](https://asciinema.org/a/E49SOALxzntdYQeC)
