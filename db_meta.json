@@ -1,0 +1,13 @@
+{
+    "jello": {
+        "ID": "int",
+        "elem1": "int",
+        "elem2": "int"
+    },
+    "asd": {
+        "ID": "int",
+        "dfg": "int",
+        "as": "int",
+        "at": "str"
+    }
+}
