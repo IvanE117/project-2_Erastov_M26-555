@@ -67,4 +67,4 @@ exit
 
 ## Демонстрация
 
-[![asciicast](https://asciinema.org/a/E49SOALxzntdYQeC.svg)](https://asciinema.org/a/E49SOALxzntdYQeC)
+![Демонстрация Primitive DB](demo.gif)
