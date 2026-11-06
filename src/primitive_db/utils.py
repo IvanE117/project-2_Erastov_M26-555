@@ -15,3 +15,16 @@ def save_metadata(filepath, data):
     with open(filepath, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
     return
+
+
+def load_table_data(table_name):
+    filepath = f'data/{table_name}.json'
+    data = load_metadata(filepath)
+    if not data:
+        return []
+    return data
+
+
+def save_table_data(table_name, data):
+    filepath = f'data/{table_name}.json'
+    save_metadata(filepath, data)
