@@ -1,6 +1,5 @@
-from primitive_db.utils import load_table_data, save_table_data
 from primitive_db.parser import clause_parser
-import prettytable
+from primitive_db.utils import load_table_data
 
 
 def check_table_existence(metadata, table_name):

@@ -1,26 +1,23 @@
 import shlex
 
 import prompt
-
 from prettytable import PrettyTable
 
 from primitive_db.core import (
     create_table,
+    delete,
     drop_table,
-    list_tables,
     insert,
+    list_tables,
     select,
     update,
-    delete,
 )
 from primitive_db.utils import (
     load_metadata,
-    save_metadata,
     load_table_data,
+    save_metadata,
     save_table_data,
 )
-
-
 
 
 def enter_command():
@@ -52,7 +49,10 @@ def print_help():
 
     print("\n***Процесс работы с таблицей***\n")
     print("Функции:")
-    print("<command> create_table <имя_таблицы> <столбец1:тип> .. - создать таблицу")
+    print(
+        "<command> create_table <имя_таблицы> <столбец1:тип> .. "
+        "- создать таблицу"
+    )
     print("<command> list_tables - показать список всех таблиц")
     print("<command> drop_table <имя_таблицы> - удалить таблицу")
 
@@ -60,11 +60,24 @@ def print_help():
 
     print("\n*** Операции с данными ***\n")
     print("Функции:")
-    print("<command> insert into <имя_таблицы> values <значение1> <значение2> ... - создать запись.")
-    print("<command> select from <имя_таблицы> where <столбец> = <значение> - прочитать записи по условию.")
+    print(
+        "<command> insert into <имя_таблицы> values "
+        "<значение1> <значение2> ... - создать запись."
+    )
+    print(
+        "<command> select from <имя_таблицы> where <столбец> = "
+        "<значение> - прочитать записи по условию."
+    )
     print("<command> select from <имя_таблицы> - прочитать все записи.")
-    print("<command> update <имя_таблицы> set <столбец1> = <новое_значение1> where <столбец_условия> = <значение_условия> - обновить запись.")
-    print("<command> delete from <имя_таблицы> where <столбец> = <значение> - удалить запись.")
+    print(
+        "<command> update <имя_таблицы> set <столбец1> = "
+        "<новое_значение1> where <столбец_условия> = "
+        "<значение_условия> - обновить запись."
+    )
+    print(
+        "<command> delete from <имя_таблицы> where <столбец> = "
+        "<значение> - удалить запись."
+    )
     print("<command> info <имя_таблицы> - вывести информацию о таблице.\n")
 
     print("\nОбщие команды:")
@@ -99,7 +112,10 @@ def run():
                 )
                 data_for_save, flag = upd_data
                 if flag:
-                    print(f'Таблица "{args[1]}" успешно создана со столбцами: {args[2:]}\n')
+                    print(
+                        f'Таблица "{args[1]}" успешно создана со столбцами: '
+                        f'{args[2:]}\n'
+                    )
                 save_metadata('db_meta.json', data_for_save)
 
             case 'list_tables':
@@ -141,7 +157,9 @@ def run():
 
                 id_, table_data = result
                 if isinstance(id_, int):
-                    print(f'Запись с ID={id_} успешно добавлена в таблицу "{t_name}".\n')
+                    print(
+                        f'Запись с ID={id_} успешно добавлена в таблицу "{t_name}".\n'
+                    )
                 else:
                     print('Ошибка: данные отсутствуют')
                     continue
