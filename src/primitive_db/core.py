@@ -8,6 +8,7 @@ from primitive_db.decorators import (
 )
 from primitive_db.parser import clause_parser
 from primitive_db.utils import load_table_data
+from primitive_db.constants import VALID_TYPES
 
 cacher = create_cacher()
 
@@ -32,7 +33,7 @@ def create_table(metadata, table_name, columns):
     table_names = [column.partition(':')[0].lower() for column in columns]
     table_types = [column.partition(':')[2] for column in columns]
     for i in range(len(columns)):
-        if table_types[i] not in ['int', 'str', 'bool'] or not table_names[i]:
+        if table_types[i] not in VALID_TYPES or not table_names[i]:
             raise ValueError(f'Некорректное значение: {columns[i]}. Попробуйте снова.')
 
     if len(table_names) != len(set(table_names)):
