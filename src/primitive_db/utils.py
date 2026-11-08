@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from primitive_db.constants import DATA_DIR
+
 
 def load_metadata(filepath):
     """Загружает JSON-данные; если файл не найден, возвращает {}."""
@@ -27,7 +29,7 @@ def load_table_data(table_name):
 
 
 def save_table_data(table_name, data):
-    Path('data').mkdir(exist_ok=True)
+    Path(DATA_DIR).mkdir(exist_ok=True)
     filepath = f'data/{table_name}.json'
     save_metadata(filepath, data)
 

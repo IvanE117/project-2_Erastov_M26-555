@@ -3,6 +3,7 @@ import shlex
 import prompt
 from prettytable import PrettyTable
 
+from primitive_db.constants import META_FILE
 from primitive_db.core import (
     create_table,
     delete,
@@ -69,7 +70,7 @@ def print_help():
 def run():
     print_help()
     while True:
-        data = load_metadata('db_meta.json')
+        data = load_metadata(META_FILE)
 
         response = enter_command()
         try:
@@ -98,7 +99,7 @@ def run():
                     f'Таблица "{args[1]}" успешно создана со столбцами: '
                     f'{args[2:]}\n'
                 )
-                save_metadata('db_meta.json', upd_data)
+                save_metadata(META_FILE, upd_data)
 
             case 'list_tables':
                 list_tables(data)
@@ -118,7 +119,7 @@ def run():
                 if upd_data is None:
                     continue
 
-                save_metadata('db_meta.json', upd_data[0])
+                save_metadata(META_FILE, upd_data[0])
                 delete_table_data(tab_name)
                 print(f'Таблица "{tab_name}" успешно удалена.\n')
 
