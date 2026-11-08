@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 
 def load_metadata(filepath):
@@ -26,5 +27,10 @@ def load_table_data(table_name):
 
 
 def save_table_data(table_name, data):
+    Path('data').mkdir(exist_ok=True)
     filepath = f'data/{table_name}.json'
     save_metadata(filepath, data)
+
+
+def delete_table_data(table_name):
+    Path(f'data/{table_name}.json').unlink(missing_ok=True)

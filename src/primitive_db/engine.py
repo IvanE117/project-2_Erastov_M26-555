@@ -13,6 +13,7 @@ from primitive_db.core import (
     update,
 )
 from primitive_db.utils import (
+    delete_table_data,
     load_metadata,
     load_table_data,
     save_metadata,
@@ -22,26 +23,6 @@ from primitive_db.utils import (
 
 def enter_command():
     return prompt.string("Введите команду: ")
-
-
-# def welcome():
-#     print("Первая попытка запустить проект!")
-#     print()
-#     print("***")
-
-#     print(
-#         "<command> exit - выйти из программы\n"
-#         "<command> help - справочная информация"
-#     )
-#     response = enter_command()
-
-#     while response != "exit":
-#         if response == "help":
-#             print(
-#                 "\n<command> exit - выйти из программы\n"
-#                 "<command> help - справочная информация"
-#             )
-#         response = enter_command()
 
 
 def print_help():
@@ -110,13 +91,14 @@ def run():
                     table_name=args[1],
                     columns=[*args[2:]]
                 )
-                data_for_save, flag = upd_data
-                if flag:
-                    print(
-                        f'Таблица "{args[1]}" успешно создана со столбцами: '
-                        f'{args[2:]}\n'
-                    )
-                save_metadata('db_meta.json', data_for_save)
+                if upd_data is None:
+                    continue
+
+                print(
+                    f'Таблица "{args[1]}" успешно создана со столбцами: '
+                    f'{args[2:]}\n'
+                )
+                save_metadata('db_meta.json', upd_data)
 
             case 'list_tables':
                 list_tables(data)
@@ -127,15 +109,18 @@ def run():
                     print('Ошибка при вводе параметров\n')
                     continue
 
+                tab_name = args[1]
                 upd_data = drop_table(
                     metadata=data,
-                    table_name=args[1]
+                    table_name=tab_name
                     )
-                if upd_data[1] is False:
+
+                if upd_data is None:
                     continue
 
-                print(f'Таблица "{args[1]}" успешно удалена.\n')
                 save_metadata('db_meta.json', upd_data[0])
+                delete_table_data(tab_name)
+                print(f'Таблица "{tab_name}" успешно удалена.\n')
 
             case 'insert':
                 if len(args) < 5:
@@ -156,6 +141,7 @@ def run():
                     continue
 
                 id_, table_data = result
+                save_table_data(t_name, table_data)
                 if isinstance(id_, int):
                     print(
                         f'Запись с ID={id_} успешно добавлена в таблицу "{t_name}".\n'
@@ -163,7 +149,6 @@ def run():
                 else:
                     print('Ошибка: данные отсутствуют')
                     continue
-                save_table_data(t_name, table_data)
 
             case 'select':
                 if len(args) < 3:
@@ -300,8 +285,10 @@ def run():
 
                 print(f'Таблица: {tab_name}')
                 print('Столбцы: ', end='')
-                for key, value in data[tab_name].items():
-                    print(f'{key}:{value}', end=', ')
+                print(
+                    ', '.join(f'{key}:{value}'
+                              for key, value in data[tab_name].items())
+                )
                 print(f'Количество записей: {len(tab_data)}\n')
 
             case 'exit':
