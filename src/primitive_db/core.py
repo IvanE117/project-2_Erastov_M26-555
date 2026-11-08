@@ -1,5 +1,6 @@
 import json
 
+from primitive_db.constants import VALID_TYPES
 from primitive_db.decorators import (
     confirm_action,
     create_cacher,
@@ -8,7 +9,6 @@ from primitive_db.decorators import (
 )
 from primitive_db.parser import clause_parser
 from primitive_db.utils import load_table_data
-from primitive_db.constants import VALID_TYPES
 
 cacher = create_cacher()
 
